@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW3JavatoCS", "HW3JavatoCS\HW3JavatoCS.csproj", "{E4B2FF4B-7555-484B-8D2D-1092D09F7D3E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4B2FF4B-7555-484B-8D2D-1092D09F7D3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4B2FF4B-7555-484B-8D2D-1092D09F7D3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4B2FF4B-7555-484B-8D2D-1092D09F7D3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4B2FF4B-7555-484B-8D2D-1092D09F7D3E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EAB9B5E7-65EF-4C3E-B539-8A7A964F8FCD}
+	EndGlobalSection
+EndGlobal
