@@ -6,11 +6,11 @@ using System.Transactions;
 
 namespace HW3JavatoCS
 {
-    class QueueUnderFlowException : Exception
+    public class QueueUnderFlowException : Exception
     {
-        QueueUnderFlowException() : base() { }
+        public QueueUnderFlowException() : base() { }
 
-        QueueUnderFlowException(string message) : base(message) { }
+        public QueueUnderFlowException(string message) : base(message) { }
 
     }
 }
