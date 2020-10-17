@@ -4,15 +4,15 @@ using System.Text;
 
 namespace HW3JavatoCS
 {
-    interface QueueInterface<T>
+    interface IQueue<T>
     {
-        T push(T element);
+        T Push(T element);
 
-        T pop();
+        T Pop();
 
-        T peek();
+        T Peek();
 
-        bool isEmpty();
+        bool IsEmpty();
 
     }
 }
