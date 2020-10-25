@@ -23,9 +23,10 @@ namespace HW4Project.Controllers
             return View();
         }
 
-        public IActionResult RGB()
+        public IActionResult RGB(RGBColors colors)
         {
-            return View();
+            
+            return View("RGB", colors);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

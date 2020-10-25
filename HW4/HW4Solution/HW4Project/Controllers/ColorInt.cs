@@ -21,9 +21,7 @@ namespace HW4Project.Controllers
 
             public IActionResult Create()
             {
-            _logger.LogInformation("This worked");
-
-            
+                _logger.LogInformation("This worked");
                 return View();
             }
     }
