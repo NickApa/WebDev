@@ -1,0 +1,57 @@
+﻿@model Interpolatar
+
+@{
+    ViewData["Title"] = "Color Interpolator";
+}
+
+<h2>Interpolate from one color to another</h2>
+<p>Please enter colors in HTML hexadecimal format #AABBCC</p>
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-sm-2">
+
+            <form type="get" asp-controller="ColorInt" asp-action="Create" method="post">
+                <label>First Color</label>
+                <input type="text" asp-for="FirstColor" />
+                <label>Second Color</label>
+                <input type="text" asp-for="SecondColor" />
+                <label>Number of Colors</label>
+                <input type="number" asp-for="NumColors" />
+
+                <p> </p>
+                <button class="btn btn-primary" type="submit">Generate Colors</button>
+            </form>
+
+        </div>
+
+        <div class="col-sm-2" style="margin-left: 75px;">
+            <table>
+                @if (Model != null)
+                {
+                    @foreach (var color in Model.outputColors)
+                    {
+                        <tr>
+                            <td style="height: 20px; margin-right:25px;">@color</td>
+                            <td class="output" style="background-color: @color;"> </td>
+                        </tr>
+                    
+                        
+                        }
+
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .output {
+        background-color: none;
+        height: 20px;
+        width: 75px;
+        margin-left: 125px;
+    }
+</style>

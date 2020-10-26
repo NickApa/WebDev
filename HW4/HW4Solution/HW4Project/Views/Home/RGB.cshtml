@@ -1,0 +1,27 @@
+﻿@model RGBColors 
+
+@{
+    ViewData["Title"] = "RGB Color";
+}
+
+
+
+<h2>Enter an RGB Color to see what it looks like!</h2>
+
+<div class="row">
+    <div class="col-sm-3">
+        <form type="get" asp-controller="Home" asp-action="RGB">
+            <label style="border: solid; border-color: black; background-color: grey">R:<input type="number" asp-for="Red" /></label>
+            <label style="border: solid; border-color: black; background-color: grey">G:<input type="number" asp-for="Green"/></label>
+            <label style="border: solid; border-color: black; background-color: grey">B:<input type="number" asp-for="Blue" /></label>
+            <button class="btn btn-primary" type="submit">Display</button>
+        </form>
+    </div>
+    <div></div>
+
+    <div class="col-sm-2" style=" background-color: @Model.chosenColor(); border-width: 2.5px; border-style:solid; border-color: black; border-radius:5%">
+    
+    </div>
+    
+</div>
+<p style="margin-left:275px">@Model.chosenColor()</p>

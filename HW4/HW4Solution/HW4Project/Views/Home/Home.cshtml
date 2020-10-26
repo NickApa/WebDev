@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">CS460 Homework 4</h1>
+    <p>2020</p>
+    <p>A couple forms and some simple server-side logic -- learning the basics of GET, POST, from data and parameter and model binding. Doing it all with ASP.NET MVC Core.</p>
+    <p> </p>
+    <button class="btn btn-secondary" style="background-color: green">Heres the Assignment!</button>
+    <p> </p>
+</div>
+
+<div class="row">
+    <div class="col">
+        <h2>RGB Color</h2>
+        <p>Want to know what a particular RGB color looks like? How about its web color format? Here you go. Uses query strings to send form data to the server, which reads in the Request object. It then performs the calculation and formats the result in a view to return to you.</p>
+        <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="RGB">Try it out >></a>
+    </div>
+    <div class="col">
+        <h2>Color Interpretation</h2>
+        <p>Typical online color choosers are way to useful. We wanted something fun and completely useless. This form POST's the data to the server and uses parameters binding to make it easy</p>
+        <a class="btn btn-primary" asp-area="" asp-controller="ColorInt" asp-action="Create">Check it out >></a>
+</div>
+
