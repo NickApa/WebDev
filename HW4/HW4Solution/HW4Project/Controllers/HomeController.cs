@@ -25,7 +25,6 @@ namespace HW4Project.Controllers
 
         public IActionResult RGB(RGBColors colors)
         {
-            
             return View("RGB", colors);
         }
 
