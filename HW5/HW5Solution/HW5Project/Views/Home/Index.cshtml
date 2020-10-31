@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Assignment Tracker</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <div style="text-align: left">
+                <h2 style="font-size: 25px">Got a new Homework Assignment?</h2>
+                <p>Use this page to enter information about your assignement. Add it and the we'll keep track of it for you. We'll let you see your assignments by priority or due date so you'll never miss getting something done!</p>
+                <p>Here's what the parts mean:</p>
+                <p><b>Priority</b> - 1 is the highest priority, 5 is the lowest priority</p>
+                <p><b>Due</b> - due date and time</p>
+                <p><b>Course</b> - enter it like this: CS460, BA491... etc. We can keep track of assignments for each department and course number</p>
+                <p><b>Title</b> - Assignment name: i.e Homework #1: CSS / HTML</p>
+                <p><b>Notes</b>- Remind yourself of important information or any general thoughts. </p>
+            </div>
+        </div>
+        <div class="col-sm-6" style="border: solid; border-color: black">
+            <form>
+                <div style="margin-top: 10px">
+                    <select name="priority" id="priority">
+                        <option value="Priority">Priority</option>
+                        <option value="one">1</option>
+                        <option value="two">2</option>
+                        <option value="three">3</option>
+                        <option value="four">4</option>
+                        <option value="five">5</option>
+                    </select>
+                </div>
+                
+                <br />
+
+                <div style="text-align: left">
+                    <label>When is it due?</label>
+                    <input type="datetime-local" ; style="margin-left:150px" />
+
+                    <br />
+
+                    <label>What Course?</label>
+                    <input type="text" ; style="margin-left: 160px; width: 247px" />
+                </div>
+
+                <br />
+
+                <div>
+                    <p>Give the Assignment title: </p>
+                    <input type="text" ; style="width: 500px" />
+                </div>
+
+                <br />
+
+                <div>
+                    <p>Add some notes about the assignment about what you need to do or remember: </p>
+                    <input type="text" ; style="width: 500px; height: 100px" />
+                </div>
+                
+                <br />
+
+            </form>
+        </div>
+    </div>
+</div>
