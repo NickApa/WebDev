@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HW5Project.Models;
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace HW5Project.Controllers
 {
@@ -14,14 +15,21 @@ namespace HW5Project.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private AssignmentsDbContext db;
+
+        public HomeController(ILogger<HomeController> logger, AssignmentsDbContext context)
         {
             _logger = logger;
+            db = context;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            foreach(var val in db.Assignments) 
+            {
+                _logger.LogInformation($"{val.Importance}, {val.Due}, {val.Course}, {val.Title}, {val.Notes}");
+            }
             return View();
         }
 
@@ -32,15 +40,16 @@ namespace HW5Project.Controllers
             return View();
         }
 
-        public IActionResult currentAssignments(Assignment assignment) 
-        {
-            if(ModelState.IsValid) 
-            {
-                return RedirectToAction();
+        [HttpPost]
+        public IActionResult currentAssignments(Assignments assignment) {
+            if(ModelState.IsValid) {
+                db.Add(assignment);
+                db.SaveChanges();
+                return RedirectToAction("CurrentAssignments", assignment);
             }
-            return View(assignment);
-              
+            return View("Index");
         }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

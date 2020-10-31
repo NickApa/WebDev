@@ -1,6 +1,19 @@
-﻿@{
+﻿@model Assignments
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <h1 style="text-align: center">@ViewData["Title"]</h1>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+
+<body>
 
 <div class="text-center">
     <h1 class="display-4">Assignment Tracker</h1>
@@ -18,9 +31,9 @@
             </div>
         </div>
         <div class="col-sm-6" style="border: solid; border-color: black">
-            <form>
+            <form asp-asp-controller="HomeController" asp-action="currentAssignments">
                 <div style="margin-top: 10px">
-                    <select name="priority" id="priority">
+                    <select name="priority" id="priority" asp-for="Importance">
                         <option value="Priority">Priority</option>
                         <option value="one">1</option>
                         <option value="two">2</option>
@@ -34,31 +47,38 @@
 
                 <div style="text-align: left">
                     <label>When is it due?</label>
-                    <input type="datetime-local" ; style="margin-left:150px" />
+                    <input type="datetime-local" ; style="margin-left:150px" asp-for="Due"/>
 
                     <br />
 
                     <label>What Course?</label>
-                    <input type="text" ; style="margin-left: 160px; width: 247px" />
+                    <input type="text" ; style="margin-left: 160px; width: 247px" asp-for="Course" />
                 </div>
 
                 <br />
 
                 <div>
                     <p>Give the Assignment title: </p>
-                    <input type="text" ; style="width: 500px" />
+                    <input type="text" ; style="width: 500px" asp-for="Title" />
                 </div>
 
                 <br />
 
                 <div>
                     <p>Add some notes about the assignment about what you need to do or remember: </p>
-                    <input type="text" ; style="width: 500px; height: 100px" />
+                    <textarea type="text" ; style="width: 500px; height: 100px" asp-for="Notes"></textarea>
                 </div>
                 
+                <br />
+
+                <button type="submit" style="margin-bottom: 10px" class="btn btn-secondary" asp-action="CurrentAssignments">Submit</button> 
+                
+
                 <br />
 
             </form>
         </div>
     </div>
 </div>
+
+</body>
