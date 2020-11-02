@@ -13,14 +13,38 @@ namespace HW5Project.Controllers
 {
     public class HomeController : Controller
     {
+        private Sort unsorted = new Sort();
+
         private readonly ILogger<HomeController> _logger;
 
-        private AssignmentsDbContext db;
+        public AssignmentsDbContext db;
+
+        [HttpPost]
+        public IActionResult Due() 
+        {   
+            var sort = new Sort();
+            sort.AssignmentSorter = db.Assignments.OrderByDescending(x => x.Due).ToList();
+            sort.AssignmentSorter = sort.AssignmentSorter.Reverse();
+            sort.Due = true;
+
+            return View("CurrentAssignments", sort);
+        }
+
+        [HttpPost]
+          public IActionResult Priority() 
+        {   
+            var sort = new Sort();
+            sort.AssignmentSorter = db.Assignments.OrderByDescending(x => x.Importance).ToList();
+            sort.AssignmentSorter = sort.AssignmentSorter.Reverse();
+            sort.Priority = true;
+            return View("CurrentAssignments", sort);
+        }
 
         public HomeController(ILogger<HomeController> logger, AssignmentsDbContext context)
         {
             _logger = logger;
             db = context;
+            unsorted.AssignmentSorter = db.Assignments.ToList();
         }
 
         [HttpGet]
@@ -35,17 +59,22 @@ namespace HW5Project.Controllers
 
         
         [HttpGet]
-        public IActionResult CurrentAssignments()
+        public IActionResult CurrentAssignments(Sort sort)
         {
-            return View();
+            if(sort.Priority == true || sort.Due == true) {
+                return View("CurrentAssignments", sort);
+            }
+            else {
+                return View("CurrentAssignments", unsorted);
+            }
         }
 
         [HttpPost]
         public IActionResult currentAssignments(Assignments assignment) {
             if(ModelState.IsValid) {
-                db.Add(assignment);
+                db.Assignments.Add(assignment);
                 db.SaveChanges();
-                return RedirectToAction("CurrentAssignments", assignment);
+                return RedirectToAction("CurrentAssignments");
             }
             return View("Index");
         }

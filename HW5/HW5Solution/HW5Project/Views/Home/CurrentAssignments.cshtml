@@ -1,6 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Current Assignments";
+﻿@model Sort
+
+
+@{
+    ViewData["Title"] = "CurrentAssignments";
 }
+
 
 
 <!DOCTYPE html>
@@ -8,6 +12,51 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <h1 style="text-align: center">@ViewData["Title"]</h1>
+    <h1 style="text-align: center">Current Assignments</h1>
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
 </head>
+
+<body>
+    <div class="row">
+        <form asp-controller="Home" asp-action="Priority" method="POST">
+            <div class="col-sm-1">
+            <button type="submit" class="btn btn-secondary" style="border: solid; border-radius: 15px" >Priority</button>
+            </div>
+        </form>
+        <form asp-controller="Home" asp-action="Due" method="POST">
+            <div class="col-sm-1">
+            <button type="submit" class="btn btn-secondary" style="border: solid; border-radius: 15px" >Date</button>
+            </div>
+        </form>
+        
+        
+        
+    </div>
+    
+    <div class="text-center">
+        <table class="table table-bordered table-solid">
+            <thead>
+                <tr>
+                    <th>Priority</th><th>Due</th><th>Course</th><th>Title</th><th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.AssignmentSorter != null)
+                {
+                    @foreach (Assignments a in Model.AssignmentSorter)
+                    {
+                        <tr>
+                            <td>@a.Importance</td>
+                            <td>@a.Due</td>
+                            <td>@a.Course</td>
+                            <td>@a.Title</td>
+                            <td>@a.Notes</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

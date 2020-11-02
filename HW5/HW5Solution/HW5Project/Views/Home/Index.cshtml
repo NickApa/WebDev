@@ -9,7 +9,6 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <h1 style="text-align: center">@ViewData["Title"]</h1>
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
 </head>
 
@@ -30,17 +29,11 @@
                 <p><b>Notes</b>- Remind yourself of important information or any general thoughts. </p>
             </div>
         </div>
-        <div class="col-sm-6" style="border: solid; border-color: black">
+        <div class="col-sm-6" style="border: solid; border-color: black" asp-validation-summary="All" style="color:red;">
             <form asp-asp-controller="HomeController" asp-action="currentAssignments">
-                <div style="margin-top: 10px">
-                    <select name="priority" id="priority" asp-for="Importance">
-                        <option value="Priority">Priority</option>
-                        <option value="one">1</option>
-                        <option value="two">2</option>
-                        <option value="three">3</option>
-                        <option value="four">4</option>
-                        <option value="five">5</option>
-                    </select>
+                <div style="margin-top: 10px; text-align: left">
+                    <label>Priority: </label>
+                    <input type="number" max="5" min="1" style="margin-left:205px" asp-for="Importance"/>
                 </div>
                 
                 <br />
@@ -73,7 +66,6 @@
 
                 <button type="submit" style="margin-bottom: 10px" class="btn btn-secondary" asp-action="CurrentAssignments">Submit</button> 
                 
-
                 <br />
 
             </form>
