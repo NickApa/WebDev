@@ -1,0 +1,79 @@
+﻿@model Search
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+
+<body>
+
+<div class="text-center">
+    <h1>Chinook Music Library</h1>
+
+    <br>
+
+    <form asp-action="Index" asp-controller="Home" method="GET">
+        <div class="input-group">
+            <input minlength="2" asp-for="nameSearch" type="text" class="form-control" placeholder="Search by artist!" aria-describedby="basic-addon1" required>
+            <div class="input-group-append">
+                <button class="btn btn-secondary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <br>
+
+    @if(Model != null)
+    {
+        int count = 0;
+
+        @if(!Model.ArtistList.Any()) {
+                <p style="font-color: red">No search results found</p>
+            }
+
+        @foreach (var item in Model.ArtistList)
+        {
+            count++;
+        } 
+        
+        if(count >= 16){
+                <p style="font-color: red">Too many results, please narrow your search</p>
+            }
+        
+    <ul>
+        @foreach (var item in Model.ArtistList)
+        {
+            if(count > 0 && count <= 16)
+            {
+                <li>
+                    <form asp-action="output" asp-controller="Home" method="POST">
+                        <button class="btn btn-link" type="submit" name="ArtistID" value="@item.ArtistId">@item.Name</button>
+                    </form>
+                </li>
+            }
+        }
+    </ul>
+    }
+   
+</div>
+
+</body>
+
+<style>
+    body {
+        background-color: lightblue;
+    }
+
+    button {
+        height: 35px;
+    }
+</style>

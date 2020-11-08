@@ -50,10 +50,6 @@ namespace HW5Project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            foreach(var val in db.Assignments) 
-            {
-                _logger.LogInformation($"{val.Importance}, {val.Due}, {val.Course}, {val.Title}, {val.Notes}");
-            }
             return View();
         }
 
@@ -61,10 +57,12 @@ namespace HW5Project.Controllers
         [HttpGet]
         public IActionResult CurrentAssignments(Sort sort)
         {
-            if(sort.Priority == true || sort.Due == true) {
+            if(sort.Priority == true || sort.Due == true) 
+            {
                 return View("CurrentAssignments", sort);
             }
-            else {
+            else 
+            {
                 return View("CurrentAssignments", unsorted);
             }
         }

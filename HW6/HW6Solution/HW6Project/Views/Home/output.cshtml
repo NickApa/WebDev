@@ -1,0 +1,47 @@
+@model Search
+
+<div>
+    
+    <div style="text-align: center;">
+        <img style="border-radius: 50%; height: 50%; width: 20%;" src="https://cdn1.iconfinder.com/data/icons/material-apps/512/icon-music-material-design-512.png" alt="MusicNote">
+    </div>
+
+    <br>
+
+    <h1 style="text-align: center;">@Model.ArtistName</h1>
+
+    <br>
+
+    <div class="row">
+        @foreach (var item in Model.Albums)
+        {
+            <div class="col-sm-6">
+                <h1 style="font-size: larger;">@item.album.Title</h1>
+                <p>Album Genre: @item.genre</p>
+
+            <table class="table table-bordered table-striped">
+                 <thead>
+                    <th>Song</th><th>Length</th><th>Price</th>
+                </thead>
+                <tbody>
+                     @foreach (var track in item.album.Tracks)
+                        {
+                        var toTime = TimeSpan.FromMilliseconds(track.Milliseconds);
+                        var times = toTime.ToString("mm\\:ss");
+                        
+                        <tr>
+                            <td>@track.Name</td>  
+                            <td>@times</td>
+                            <td>$@track.UnitPrice</td>
+                        </tr>
+                         
+                        }
+                </tbody>
+            </table>
+
+            </div>
+        }
+
+    </div>
+</div>
+
