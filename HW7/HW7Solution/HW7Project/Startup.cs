@@ -42,8 +42,25 @@ namespace HW7Project
 
             app.UseAuthorization();
 
+            
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "gitAPI",
+                    pattern: "api/user",
+                    defaults: new { controller = "Home", action = "GitUserInfo" }
+                );
+                endpoints.MapControllerRoute(
+                    name: "gitAPIrepo",
+                    pattern: "api/repositories",
+                    defaults: new { controller = "Home", action = "GitRepoInfo" }
+                );
+                endpoints.MapControllerRoute(
+                    name: "gitAPIcommit",
+                    pattern: "api/commits",
+                    defaults: new { controller = "Home", action = "GitCommitInfo" }
+                );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
