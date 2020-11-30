@@ -1,0 +1,77 @@
+@model Sort
+
+
+@{
+    ViewData["Title"] = "CurrentAssignments";
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <h1 style="text-align: center">Current Assignments</h1>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+
+<body>
+    <div class="row">
+        
+            <form asp-controller="Home" asp-action="Priority" method="POST">
+            <div class="col-sm-1">
+            <button type="submit" class="btn btn-secondary" style="border: solid; border-radius: 15px" >Priority</button>
+            </div>
+        </form>
+        <form asp-controller="Home" asp-action="Due" method="POST">
+            <div class="col-sm-1">
+            <button type="submit" class="btn btn-secondary" style="border: solid; border-radius: 15px" >Date</button>
+            </div>
+        </form>
+        
+        
+        
+             @foreach (var c in Model.Courses)
+        {
+            <div class="col-sm-1" >
+                 <a asp-action="GetCourses" asp-route-id="@c.Id" style="border: solid; border-radius: 15px" class="btn btn-secondary">@c.Name</a>
+            </div>
+           
+        }
+        
+
+    </div>
+    
+    <div class="text-center">
+        <table class="table table-bordered table-solid">
+            <thead>
+                <tr>
+                    <th>Completed</th><th>Priority</th><th>Due</th><th>Course</th><th>Title</th><th>Notes</th><th>Tags</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.AssignmentSorter != null)
+                {
+                    @foreach (Assignment a in Model.AssignmentSorter)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="Home" asp-action="Delete" asp-route-id="@a.Id" class="btn btn-success">Completed</a>
+                            </td>
+
+                            <td>@a.Importance</td>
+                            <td>@a.Due</td>
+                            <td>@a.Course.Name</td>
+                            <td>@a.Title</td>
+                            <td>@a.Notes</td>
+                            <td></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

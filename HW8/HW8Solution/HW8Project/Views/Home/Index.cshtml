@@ -1,0 +1,106 @@
+﻿@model Assignment
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Assignment Tracker</h1>
+
+        <div>
+            <form asp-controller="Home" asp-action="AddCourse" method="GET">
+                <input type="text" placeholder="Enter classes to add, comma seperated" name="CourseName" style="width: 30%;" required> 
+                <button type="submit" >Enter</button>
+            </form>
+        </div>
+
+        <br>
+
+        <div>
+            <form asp-controller="Home" asp-action="AddTag" method="GET">
+                <input type="text" name="TagName" placeholder="Enter Tags to add, comma seperated" style="width: 30%;" required>
+                <button type="submit" >Enter</button>
+            </form>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div style="text-align: left">
+                <h2 style="font-size: 25px">Got a new Homework Assignment?</h2>
+                <p>Use this page to enter information about your assignement. Add it and the we'll keep track of it for you. We'll let you see your assignments by priority or due date so you'll never miss getting something done!</p>
+                <p>Here's what the parts mean:</p>
+                <p><b>Priority</b> - 1 is the highest priority, 5 is the lowest priority</p>
+                <p><b>Due</b> - due date and time</p>
+                <p><b>Course</b> - enter it like this: CS460, BA491... etc. We can keep track of assignments for each department and course number</p>
+                <p><b>Title</b> - Assignment name: i.e Homework #1: CSS / HTML</p>
+                <p><b>Notes</b>- Remind yourself of important information or any general thoughts. </p>
+                <p><b>Tags</b>- Enter 0 or more tags to see quick information about your assignment</p>
+            </div>
+            </div>
+            <div class="col-sm-6" style="border: solid; border-color: black" style="color:red;">
+                <form asp-controller="HomeController" asp-action="currentAssignments">
+                    <div style="margin-top: 10px; text-align: left">
+                        <label>Priority: </label>
+                        <input type="number" max="5" min="1" style="margin-left:205px" asp-for="Importance" required/>
+                    </div>
+
+                    <br />
+
+                    <div style="text-align: left">
+                        <label>When is it due?</label>
+                        <input type="datetime-local" ; style="margin-left:150px" asp-for="Due" required />
+
+                        <br />
+
+                        <label>What Course?</label>
+                        <select asp-for="Courseid" asp-items="ViewBag.Courses" style="margin-left: 160px; width: 247px"></select>
+                        
+                    </div>
+
+                    <br />
+
+                    <div>
+                        <p>Give the Assignment title: </p>
+                        <input type="text" ; style="width: 500px" asp-for="Title" required />
+                    </div>
+
+                    <br />
+
+                    <div>
+                        <p>Add some notes about the assignment; what you need to do or remember: </p>
+                        <textarea type="text" ; style="width: 500px; height: 100px" asp-for="Notes"></textarea>
+                    </div>
+
+                    <br />
+
+                    <div>
+                        <p>Tags</p>
+                        <div>
+                            @* @foreach (var item in Model.AssignmentTags)
+                            {
+                                <input type="checkbox" />
+                                <label>@item.Tagname.Tagname1</label>
+                            } *@
+                            
+                        </div>
+                        
+                    </div>
+
+                    <br>
+
+                    <button type="submit" style="margin-bottom: 10px" class="btn btn-secondary" asp-action="CurrentAssignments">Submit</button>
+
+                    <br />
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+@section Scripts{<script>
+    function RefreshPage() {
+        window.location.href="/";
+    }
+</script>} 

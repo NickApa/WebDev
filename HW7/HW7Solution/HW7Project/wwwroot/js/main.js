@@ -16,7 +16,6 @@ function gitUserAjax() {
             $("#avatar").append(`<img src="${data.avatar}" style="height:195px; width: 200px"></img>`);
             $("#location").append(data.location);
             $("#company").append(data.company);
-
         }
     );
 } 
@@ -38,12 +37,10 @@ function gitRepoAjax() {
                 </div>`;
                 $("#parent").append(div);
             }
-            
         }
     );
 }
  
-
 function gitCommits(repoName, owner) {
     console.log(owner);
     $.getJSON("/api/commits?repoName="+repoName+"&owner="+owner, 
@@ -55,15 +52,14 @@ function gitCommits(repoName, owner) {
             for(let i = 0; i < data.length; i++) 
             {
                 let tr = `<tr>
-                    <td><a href="${data[i].shaURL}">${data[i].sha.substr(0,7)}</a></td>
-                    <td>${data[i].timeStamp}</td>
+                    <td><a href="${data[i].shaURL}">${data[i].sha.substr(0,8)}</a></td>
+                    <td style="width: auto;">${data[i].timeStamp}</td>
                     <td>${data[i].committee}</td>
                     <td>${data[i].message}</td>
                 </tr>`;
 
                 $("#commits").last().append(tr);
             }
-            
         }
     );
 }
