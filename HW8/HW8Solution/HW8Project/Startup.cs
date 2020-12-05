@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HW8Project.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,15 +20,22 @@ namespace HW8Project
             Configuration = configuration;
         }
 
+        private readonly IConfiguration config; 
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //string password = config["Password:secret"];
+            //var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("AssignmentTrackerAzure"));
+            //builder.Password = Configuration["AssignmentTrackerAzure"];
+
             services.AddControllersWithViews();
             services.AddDbContext<AssignmentsDbContext>(opts =>
             {
-              opts.UseSqlServer(Configuration["ConnectionStrings:AssignmentString"]);
+                //opts.UseSqlServer(Configuration["ConnectionStrings:AssignmentString"]);
+                opts.UseSqlServer(Configuration.GetConnectionString("AssignmentTrackerAzure"));
             });
         }
 
