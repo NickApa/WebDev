@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Expeditions.Models;
 
 namespace Expeditions.Controllers
 {
@@ -13,8 +14,11 @@ namespace Expeditions.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ExpeditionsDbContext Db;
+
+        public HomeController(ILogger<HomeController> logger, ExpeditionsDbContext context)
         {
+            Db = context;
             _logger = logger;
         }
 
@@ -30,3 +34,4 @@ namespace Expeditions.Controllers
         }
     }
 }
+ 
