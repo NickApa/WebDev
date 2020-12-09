@@ -9,3 +9,14 @@ $(document).ready(function () { window.setInterval(execute, 5000) });
 function execute() {
         console.log('Running execute function');
 }
+
+$.ajax({
+    type: "POST",
+    url: "Home/DataStats",
+    dataType: "List",
+    success: display
+})
+
+function display(data) {
+    $("#stats").text = data;
+}

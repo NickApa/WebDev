@@ -29,11 +29,23 @@ namespace Expeditions.Controllers
 
             var mountain = new Mountain()
             {
-                mtn =  mtnlist.Take(15).ToList()
-                expeditions 
+                mtn = mtnlist.Take(15).ToList(),
+                
             };
 
             return View(mountain);
+        }
+
+        public List<int> DataStats()
+        {
+            var list = new List<int>();
+            int _currentlyTracking = Db.Expeditions.Count();
+            int peaks = Db.Peaks.Count();
+            int notClimbed = Db.Peaks.Where(x => x.Expeditions.Count() == 0).Count();
+            list.Add(_currentlyTracking);
+            list.Add(peaks);
+            list.Add(notClimbed);
+            return (list);
         }
 
         public IActionResult Climber() 
