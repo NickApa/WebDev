@@ -19,6 +19,7 @@ namespace Expeditions.Models
         public virtual DbSet<Peak> Peaks { get; set; }
         public virtual DbSet<TrekkingAgency> TrekkingAgencies { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

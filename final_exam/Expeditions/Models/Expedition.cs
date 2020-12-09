@@ -29,6 +29,6 @@ namespace Expeditions.Models
         public virtual Peak Peak { get; set; }
         [ForeignKey(nameof(TrekkingAgencyId))]
         [InverseProperty("Expeditions")]
-        public virtual TrekkingAgency TrekkingAgency { get; set; }
+        public virtual TrekkingAgency TrekkingAgency { get; set; } 
     }
 }

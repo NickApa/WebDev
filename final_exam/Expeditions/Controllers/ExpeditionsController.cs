@@ -21,8 +21,14 @@ namespace Expeditions.Controllers
         // GET: Expeditions
         public async Task<IActionResult> Index()
         {
+            ViewData["PeakId"] = new SelectList(_context.Peaks, "Id", "Name");
             var expeditionsDbContext = _context.Expeditions.Include(e => e.Peak).Include(e => e.TrekkingAgency);
-            return View(await expeditionsDbContext.ToListAsync());
+            var sort = new PeakSort()
+            {
+                expeditions = await expeditionsDbContext.ToListAsync(),
+                peaks = await _context.Peaks.ToListAsync()
+            };
+            return View(sort);
         }
 
         // GET: Expeditions/Details/5
@@ -45,11 +51,83 @@ namespace Expeditions.Controllers
             return View(expedition);
         }
 
+        public IActionResult SortbyDate()
+        {
+            ViewData["PeakId"] = new SelectList(_context.Peaks, "Id", "Name");
+            var trek = _context.Expeditions
+            .OrderByDescending(d => d.StartDate)
+            .Include(p => p.Peak)
+            .Include(t => t.TrekkingAgency).ToList();
+
+            trek.Reverse();
+
+            var sort = new PeakSort()
+            {
+                expeditions = trek,
+                peaks =  _context.Peaks.ToList()
+            };
+            return View("Index", sort);
+        }
+
+        public IActionResult SelectPeak(PeakSort mtn)
+        {
+            ViewData["PeakId"] = new SelectList(_context.Peaks, "Id", "Name");
+
+            var trek = _context.Expeditions
+                .Include(p => p.Peak)
+                .Include(t => t.TrekkingAgency)
+                .Where(p => p.Peak.Id == mtn.mtnPeak.Id).ToList();
+
+            var sort = new PeakSort()
+            {
+                expeditions = trek,
+                peaks = _context.Peaks.ToList()
+            };
+            return View("Index", sort);
+        }
+
+        public IActionResult SortbyPeak()
+        {
+            ViewData["PeakId"] = new SelectList(_context.Peaks, "Id", "Name");
+            var trek = _context.Expeditions
+            .OrderByDescending(d => d.Peak)
+            .Include(p => p.Peak)
+            .Include(t => t.TrekkingAgency).ToList();
+
+            trek.Reverse();
+
+            var sort = new PeakSort()
+            {
+                expeditions = trek,
+                peaks = _context.Peaks.ToList()
+            };
+            return View("Index", sort);
+        }
+
+        public IActionResult SortbySuccess()
+        {
+            
+            ViewData["PeakId"] = new SelectList(_context.Peaks, "Id", "Name");
+            var trek = _context.Expeditions
+            .Where(s => s.TerminationReason.Contains("cess"))
+            .Include(p => p.Peak)
+            .Include(t => t.TrekkingAgency).ToList();
+
+            var sort = new PeakSort()
+            {
+                expeditions = trek,
+                peaks = _context.Peaks.ToList()
+            };
+            return View("Index", sort);
+        }
+
+       
         // GET: Expeditions/Create
         public IActionResult Create()
         {
             ViewData["PeakId"] = new SelectList(_context.Peaks, "Id", "Name");
-            ViewData["TrekkingAgencyId"] = new SelectList(_context.TrekkingAgencies, "Id", "Id");
+            ViewData["TrekkingAgencyId"] = new SelectList(_context.TrekkingAgencies, "Id", "Name");
+            
             return View();
         }
 
