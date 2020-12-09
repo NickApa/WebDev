@@ -24,10 +24,19 @@ namespace Expeditions.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var mtnlist = Db.Peaks.OrderByDescending(x => x.Height);
+            mtnlist.Reverse();
+
+            var mountain = new Mountain()
+            {
+                mtn =  mtnlist.Take(15).ToList()
+                expeditions 
+            };
+
+            return View(mountain);
         }
 
-        public IActionResult Expedition() 
+        public IActionResult Climber() 
         {
             return View();
         }

@@ -22,12 +22,15 @@ namespace Expeditions.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["PeakId"] = new SelectList(_context.Peaks, "Id", "Name");
-            var expeditionsDbContext = _context.Expeditions.Include(e => e.Peak).Include(e => e.TrekkingAgency);
+            var expeditionsDbContext = _context.Expeditions.OrderByDescending(x => x.StartDate).Include(e => e.Peak).Include(e => e.TrekkingAgency);
+            expeditionsDbContext.Reverse();
             var sort = new PeakSort()
             {
-                expeditions = await expeditionsDbContext.ToListAsync(),
-                peaks = await _context.Peaks.ToListAsync()
+                expeditions = await expeditionsDbContext.Take(50).ToListAsync(),
+                peaks = await _context.Peaks.ToListAsync(),
+                
             };
+            
             return View(sort);
         }
 
@@ -63,7 +66,7 @@ namespace Expeditions.Controllers
 
             var sort = new PeakSort()
             {
-                expeditions = trek,
+                expeditions = trek.Take(50),
                 peaks =  _context.Peaks.ToList()
             };
             return View("Index", sort);
@@ -80,7 +83,7 @@ namespace Expeditions.Controllers
 
             var sort = new PeakSort()
             {
-                expeditions = trek,
+                expeditions = trek.Take(50),
                 peaks = _context.Peaks.ToList()
             };
             return View("Index", sort);
@@ -98,7 +101,7 @@ namespace Expeditions.Controllers
 
             var sort = new PeakSort()
             {
-                expeditions = trek,
+                expeditions = trek.Take(50),
                 peaks = _context.Peaks.ToList()
             };
             return View("Index", sort);
@@ -115,7 +118,7 @@ namespace Expeditions.Controllers
 
             var sort = new PeakSort()
             {
-                expeditions = trek,
+                expeditions = trek.Take(50),
                 peaks = _context.Peaks.ToList()
             };
             return View("Index", sort);
@@ -125,8 +128,8 @@ namespace Expeditions.Controllers
         // GET: Expeditions/Create
         public IActionResult Create()
         {
-            ViewData["PeakId"] = new SelectList(_context.Peaks, "Id", "Name");
-            ViewData["TrekkingAgencyId"] = new SelectList(_context.TrekkingAgencies, "Id", "Name");
+            ViewData["PeakId"] = new SelectList(_context.Peaks.OrderBy(x => x.Name), "Id", "Name");
+            ViewData["TrekkingAgencyId"] = new SelectList(_context.TrekkingAgencies.OrderBy(x => x.Name), "Id", "Name");
             
             return View();
         }
@@ -138,6 +141,9 @@ namespace Expeditions.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Season,Year,StartDate,TerminationReason,OxygenUsed,PeakId,TrekkingAgencyId")] Expedition expedition)
         {
+            
+            
+
             if (ModelState.IsValid)
             {
                 _context.Add(expedition);
